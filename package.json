@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "start": "babel-node server.js"
+  },
+  "dependencies": {
+    "axios": "^0.16.1",
+    "express": "^4.15.2",
+    "expressjs": "^1.0.1",
+    "pg": "^6.1.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-stage-2": "^6.24.1"
+  }
+}
