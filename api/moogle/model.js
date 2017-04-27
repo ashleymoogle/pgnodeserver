@@ -1,8 +1,8 @@
 import pool from '../../lib/db'
 
-export const getAll = (req) => {
+export const getAllmoogles = (req) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT * FROM people', (err, data) => {
+        pool.query('SELECT * FROM moogle', (err, data) => {
             if(err)
                 reject(err)
             resolve(data)
@@ -10,9 +10,9 @@ export const getAll = (req) => {
     })
 }
 
-export const getNames = (req) => {
+export const getMoogleNames = (req) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT id, name FROM people', (err, data) => {
+        pool.query('SELECT id, name FROM moogle', (err, data) => {
             if(err)
                 reject(err)
             resolve(data)
@@ -20,9 +20,9 @@ export const getNames = (req) => {
     })
 }
 
-export const getComz = (req) => {
+export const getMoogleComz = (req) => {
     return new Promise((resolve, reject) => {
-        pool.query('SELECT id, comment FROM people', (err, data) => {
+        pool.query('SELECT id, comment FROM moogle', (err, data) => {
             if(err)
                 reject(err)
             resolve(data)

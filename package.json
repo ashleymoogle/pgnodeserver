@@ -1,11 +1,10 @@
 {
   "scripts": {
-    "start": "babel-node api/server.js"
+    "start": "export USER=romainb; export DATABASE=pgnode; babel-node api/server.js "
   },
   "dependencies": {
     "axios": "^0.16.1",
     "express": "^4.15.2",
-    "expressjs": "^1.0.1",
     "pg": "^6.1.5"
   },
   "devDependencies": {
