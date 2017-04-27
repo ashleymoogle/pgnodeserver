@@ -10,6 +10,8 @@ router.route('/').get((req, res) =>  {
             result.push(row)
         })
         res.json(result);
+    }).catch((err) => {
+        console.log(err)
     })
 });
 
@@ -20,6 +22,8 @@ router.route('/name').get((req, res) =>  {
             result.push(row)
         })
         res.json(result);
+    }).catch((err) => {
+        console.log(err)
     })
 });
 
@@ -30,6 +34,8 @@ router.route('/comment').get((req, res) =>  {
             result.push(row)
         })
         res.json(result);
+    }).catch((err) => {
+        console.log(err)
     })
 });
 
