@@ -1,11 +1,11 @@
 import express from 'express'
-import pool from '../lib/db'
+import {getAll, getNames, getComz} from './model'
 
 const router = express.Router()
 
 router.route('/').get((req, res) =>  {
     const result = [];
-    pool.query('SELECT * FROM people', (req, data) => {
+    getAll().then((data) => {
         data.rows.map((row) => {
             result.push(row)
         })
@@ -15,7 +15,7 @@ router.route('/').get((req, res) =>  {
 
 router.route('/name').get((req, res) =>  {
     const result = [];
-    pool.query('SELECT name FROM people', (req, data) => {
+    getNames().then((data) => {
         data.rows.map((row) => {
             result.push(row)
         })
@@ -25,7 +25,7 @@ router.route('/name').get((req, res) =>  {
 
 router.route('/comment').get((req, res) =>  {
     const result = [];
-    pool.query('SELECT comment FROM people', (req, data) => {
+    getComz().then((data) => {
         data.rows.map((row) => {
             result.push(row)
         })

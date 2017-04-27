@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "babel-node server.js"
+    "start": "babel-node api/server.js"
   },
   "dependencies": {
     "axios": "^0.16.1",

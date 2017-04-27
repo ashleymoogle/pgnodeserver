@@ -1,5 +1,5 @@
 import express from 'express'
-import people from './peeps'
+import people from './people/controller'
 
 const router = express.Router()
 
