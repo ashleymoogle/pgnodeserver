@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.route('/').get((req, res) =>  {
     const result = [];
-    getAll().then((data) => {
+    getAll(req).then((data) => {
         data.rows.map((row) => {
             result.push(row)
         })
@@ -17,7 +17,7 @@ router.route('/').get((req, res) =>  {
 
 router.route('/name').get((req, res) =>  {
     const result = [];
-    getNames().then((data) => {
+    getNames(req).then((data) => {
         data.rows.map((row) => {
             result.push(row)
         })
@@ -29,7 +29,7 @@ router.route('/name').get((req, res) =>  {
 
 router.route('/comment').get((req, res) =>  {
     const result = [];
-    getComz().then((data) => {
+    getComz(req).then((data) => {
         data.rows.map((row) => {
             result.push(row)
         })
