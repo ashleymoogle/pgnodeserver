@@ -20,8 +20,8 @@ export const getCreature = (id) => {
     })
 }
 
-export const getCreatureFriends = async (id) => {
-    return await new Promise((resolve, reject) => {
+export const getCreatureFriends = (id) => {
+    return new Promise((resolve, reject) => {
         pool.query(`SELECT friends.creature_id, creature.name, friends.type, friends.friend_id, (CONCAT(moogle.name,chocobo.name)) as name
                     FROM friends 
                     INNER JOIN creature ON creature.id = friends.creature_id

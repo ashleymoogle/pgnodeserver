@@ -8,32 +8,29 @@ router.route('/').get((req, res) =>  {
     getAllCreatures(req).then((data) => {
         data.rows.map((row) => {
             result.push(row)
-        })
+        });
         res.json(result);
     }).catch((err) => {
         console.log(err)
     })
 });
 
-router.route('/all').get((req, res) =>  {
-    const result = [];
-    getAllCreatures(req).then((data) => {
-        Promise.all(data.rows.map((row, i) => {
-            result.push(row)
-            return getCreatureFriends(i+1).then((data) => {
-                result[i].friends = []
-                data.rows.map((row) => {
-                    result[i].friends.push(row)
-                })
-            }).catch((err) => {
-                console.log(err)
+router.route('/all').get(async (req, res) =>  {
+    try {
+        const result = [];
+        const creatures = await getAllCreatures(req);
+        await Promise.all(creatures.rows.map(async (row, i) => {
+            result.push(row);
+            result[i].friends = [];
+            let friends = await getCreatureFriends(i+1);
+            friends.rows.map((row) => {
+                result[i].friends.push(row)
             })
-        })).then(() => {
-            res.json(result);
-        })
-    }).catch((err) => {
-        console.log(err)
-    })
+        }));
+        res.json(result);
+    } catch(e) {
+        res.json(e);
+    }
 });
 
 router.route('/:id').get((req, res) =>  {
@@ -41,25 +38,42 @@ router.route('/:id').get((req, res) =>  {
     getCreature(req.params.id).then((data) => {
         data.rows.map((row) => {
             result.push(row)
-        })
+        });
         res.json(result);
     }).catch((err) => {
         console.log(err)
     })
 });
 
-router.route('/friends/:id').get((req, res) =>  {
+router.route('/friends/:id').get(async (req, res) =>  {
+    try {
+        const result = [];
+        const id = req.params.id;
+        const creature = await getCreature(id);
+        creature.rows.map((row) => {
+            result.push(row);
+        });
+        result[0].friends = [];
+        const friends = await getCreatureFriends(id);
+        friends.rows.map((row) => {
+            result[0].friends.push(row)
+        });
+        console.log(result);
+        res.json(result);
+    }catch(e){
+        res.json(e)
+    }
     const result = [];
     getCreature(req.params.id).then((data) => {
         data.rows.map((row) => {
             result.push(row)
-        })
+        });
         getCreatureFriends(req.params.id).then((data) => {
-            result[0].friends = []
+            result[0].friends = [];
             data.rows.map((row) => {
                 result[0].friends.push(row)
-            })
-            console.log(result)
+            });
+            console.log(result);
             res.json(result);
         }).catch((err) => {
             console.log(err)
