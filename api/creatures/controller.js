@@ -1,4 +1,5 @@
 import express from 'express'
+import _ from 'lodash'
 import {getAllCreatures, getCreature, getCreatureFriends} from './model'
 
 const router = express.Router()
@@ -17,15 +18,10 @@ router.route('/').get((req, res) =>  {
 
 router.route('/all').get(async (req, res) =>  {
     try {
-        const result = [];
         const creatures = await getAllCreatures(req);
-        await Promise.all(creatures.rows.map(async (row, i) => {
-            result.push(row);
-            result[i].friends = [];
-            let friends = await getCreatureFriends(i+1);
-            friends.rows.map((row) => {
-                result[i].friends.push(row)
-            })
+        const result = await Promise.all(creatures.rows.map(async (elem) => {
+            const friends = await getCreatureFriends(elem.id)
+            return {...elem, friends: friends.rows}
         }));
         res.json(result);
     } catch(e) {
