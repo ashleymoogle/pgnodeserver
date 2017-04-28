@@ -1,6 +1,6 @@
 export default {
-    user: process.env.USER, //env var: PGUSER
-    database: process.env.DATABASE, //env var: PGDATABASE
+    user: 'romainb', //env var: PGUSER
+    database: 'pgnode', //env var: PGDATABASE
     password: '', //env var: PGPASSWORD
     host: 'localhost', // Server hosting the postgres database
     port: 5432, //env var: PGPORT
